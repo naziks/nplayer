@@ -9,12 +9,12 @@
 	<title>nPlayer</title>
 	<link href="https://fonts.googleapis.com/css?family=Bellota|Source+Code+Pro&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./assets/css/main.min.css">
+	<link rel="manifest" href="./manifest.json">
+	<link rel="shortcut icon" type="image/png" href="./list/pic/placeholder.png">
 </head>
 <body>
-
 	<nav>Nazarko's Music</nav>
 
-	
 	<section class="player hidden">
 		<div class="image">
 			<img src="./list/pic/placeholder.png" alt="Cover">
@@ -44,5 +44,6 @@
 	<script src="./assets/js/jquery.min.js"></script>
 	<script src="./assets/js/app.class.js"></script>
 	<script src="./assets/js/player.js"></script>
+
 </body>
 </html>

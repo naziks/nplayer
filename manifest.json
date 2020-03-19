@@ -1,0 +1,16 @@
+{
+    "name": "nPlayer",
+    "short_name": "nplayer",
+    "description": "Web player with my music",
+    "icons": [
+        {
+            "src": "./list/pic/placeholder.png",
+            "sizes": "250x250",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "./?pwa",
+    "display": "fullscreen",
+    "theme_color": "#1B1B1B",
+    "background_color": "#1B1B1B"
+}

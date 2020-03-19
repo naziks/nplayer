@@ -4,6 +4,7 @@ let nPlayer = function(){
 	this.active = -1;
 	this.seeking = false;
 	this.seeking_value = 0;
+	this.after_fetch = () => {};
 	
 	// Fetch list
 	this.fetch_list = () => {
@@ -11,6 +12,8 @@ let nPlayer = function(){
 		$.get('../../list/cache.json', function(r){
 			let res = "";
 			let list = [];
+			window.CACHE = r.map(e => e.hasOwnProperty('picture') ? e.picture.url : '').filter(e => e.length > 0);
+			self.after_fetch();
 			$(r).each((i,r) => {
 				let title = r.filename.replace('./list/', '').replace('.mp3', '').replace('.m4a', '');
 				let artist = "";
@@ -86,6 +89,10 @@ let nPlayer = function(){
 		$('.seekbar input').attr('step', '1');
 		$('.seekbar input').attr('min', '0');
 		$('.seekbar input').val('0');
+
+		if(DB.get('caching_audio') == 'yes'){
+			navigator.serviceWorker.controller.postMessage({cache:[this.src]});
+		}
 	})
 
 	$(this.player).on('timeupdate', function () {
@@ -112,4 +119,29 @@ let nPlayer = function(){
 			self.seeking_value = this.value
 		}
 	})
+}
+
+const nDB = function(){
+	this.get = key => {
+		return localStorage.getItem(key);
+	}
+
+	this.set = (key, value) => {
+		return localStorage.setItem(key,value);
+	}
+
+	this.has = key => {
+		return localStorage.getItem(key) != null;
+	}
+
+	this.list = () => {
+		let len = localStorage.length;
+		let res = Object.create(null);
+		for(let i = 0; i < len; i++){
+			let key = localStorage.key(i);
+			let val = localStorage.getItem(key);
+			res[key] = val;
+		}
+		return res;
+	}
 }
