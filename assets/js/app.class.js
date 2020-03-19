@@ -2,6 +2,8 @@ let nPlayer = function(){
 	// Cached list
 	this.list = [];
 	this.active = -1;
+	this.seeking = false;
+	this.seeking_value = 0;
 	
 	// Fetch list
 	this.fetch_list = () => {
@@ -53,11 +55,11 @@ let nPlayer = function(){
 		$('.player .title').text(item.title);
 		$('.player .artist').text(item.artist);
 		$('.player .image img').attr('src', item.picture);
-		$('audio').attr('src', item.filename);
+		this.player.src = item.filename;
 		if($('.player').hasClass('hidden')){
 			$('.player').removeClass('hidden');
 		}
-		$('audio')[0].play();
+		this.player.play();
 		$('section.list .container .item.active').removeClass('active').removeClass('playing')
 		$('[data-id="'+this.active+'"]').addClass('active').addClass('playing')
 	}
@@ -67,11 +69,47 @@ let nPlayer = function(){
 		if($(e).hasClass('paused')){
 			$(e).removeClass('paused');
 			$('[data-id="'+this.active+'"]').addClass('active').addClass('playing')
-			$('audio')[0].play();
+			this.player.play();
 		}else{
 			$('[data-id="'+this.active+'"]').addClass('active').removeClass('playing')
 			$(e).addClass('paused')
-			$('audio')[0].pause();
+			this.player.pause();
 		}
 	}
+
+	this.player = new Audio();
+
+	let self = this;
+
+	$(this.player).on('loadstart', function () {
+		$('.seekbar input').attr('max', window.innerWidth * 2);
+		$('.seekbar input').attr('step', '1');
+		$('.seekbar input').attr('min', '0');
+		$('.seekbar input').val('0');
+	})
+
+	$(this.player).on('timeupdate', function () {
+		if(!self.seeking){
+			$('.seekbar input').attr('max', window.innerWidth * 2);
+			$('.seekbar input').attr('step', '1');
+			$('.seekbar input').attr('min', '0');
+			$('.seekbar input').val('0');
+			$('.seekbar input').val(Math.trunc((app.player.currentTime / app.player.duration) * window.innerWidth * 2));
+		}
+	})
+
+	$('.seekbar input').on('touchstart mousedown', function () {
+		self.seeking = true;
+	})
+
+	$('.seekbar input').on('touchend mouseup', function () {
+		self.seeking = false;
+		self.player.currentTime = Math.trunc((self.seeking_value / (window.innerWidth * 2)) * app.player.duration);
+	})
+
+	$('.seekbar input').on('input', function () {
+		if(self.seeking){
+			self.seeking_value = this.value
+		}
+	})
 }

@@ -7,11 +7,21 @@ section.player{
 	background-color: #2e2e2e;
 	box-shadow: 0 0 1px #7c7c7c;
 	transition:bottom .3s ease-in-out;
+	z-index: 100500;
+
+	&.hidden + .list{
+		max-height: calc(100vh - 60px);
+		overflow-y: auto;
+
+		@media screen and (max-width: 700px){
+			max-height: calc(100vh - 60px) !important;
+		}
+	}
 
 	&.hidden{
-		bottom:-100px;
+		bottom:-110px;
 		@media screen and (max-width: 700px){
-			bottom:-75px;
+			bottom:-85px;
 		}
 	}
 
@@ -23,7 +33,7 @@ section.player{
 		display: block;
 		width: 100px;
 		height: 100px;
-		float: left;
+		float: left;	
 
 		@media screen and (max-width: 700px){
 			width: 70px;
@@ -59,6 +69,70 @@ section.player{
 	.title{
 		top:0;
 		font-weight: bold;
+	}
+
+	.seekbar{
+		display: block;
+		// /* Hide */display:none;
+		position: fixed;
+		// background-color: indianred;
+		width: 100vw;
+
+		height: 3px;
+
+		$track-w: 100vw;
+		$track-h: 2px;
+		$thumb-d: 20px;
+
+		@mixin track() {
+			box-sizing: border-box;
+			border: none;
+			width: $track-w; height: $track-h;
+			background: rgba(204,204,204,0.5);
+		}
+
+		@mixin thumb() {
+			box-sizing: border-box;
+			border: none;
+			width: $thumb-d; height: $thumb-d;
+			border-radius: 50%;
+			background: rgba(255,153,0, 0.8);
+
+			&:hover{
+				background: rgba(255,153,0, 1);
+			}
+		}
+
+		[type='range'] {
+			&, &::-webkit-slider-thumb {
+				-webkit-appearance: none;
+			}
+			transform: translateY(-10px);
+
+			margin: 0;
+			padding: 0;
+			width: $track-w; height: $thumb-d;
+			background: transparent;
+			font: 1em/1 arial, sans-serif;
+
+			&::-webkit-slider-runnable-track {
+				@include track
+			}
+			&::-moz-range-track { @include track }
+			&::-ms-track { @include track }
+
+			&::-webkit-slider-thumb {
+				margin-top: .5*($track-h - $thumb-d);
+				@include thumb
+			}
+			&::-moz-range-thumb { @include thumb }
+			&::-ms-thumb {
+				margin-top: 0;
+				@include thumb
+			}
+
+			&::-ms-tooltip { display: none }
+		}
 	}
 
 	.artist{
@@ -128,6 +202,7 @@ section.player{
 				width: 50%;
 			}
 		}
+
 
 	}
 }

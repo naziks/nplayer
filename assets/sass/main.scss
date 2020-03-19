@@ -24,12 +24,18 @@ nav{
 
 html{
 	background-color: #282828;
+	overflow-y: hidden;
 }
 
 body{
 	margin-top: 60px;
 	margin-bottom: 70px;
-	min-height: calc(100vh - 130px);
+	height: calc(100vh - 60px - 100px);
+	max-height: calc(100vh - 60px - 100px);
+	@media screen and (max-width: 700px){
+		height: calc(100vh - 60px - 70px);
+		max-height: calc(100vh - 60px - 70px);
+	}
 }
 
 .container{

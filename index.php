@@ -14,9 +14,6 @@
 
 	<nav>Nazarko's Music</nav>
 
-	<section class="list">
-		<div class="container"></div>
-	</section>
 	
 	<section class="player hidden">
 		<div class="image">
@@ -24,7 +21,9 @@
 		</div>
 		<div class="title">Title</div>
 		<div class="artist">Artist</div>
-		<div class="scrollbar"></div>
+		<div class="seekbar">
+			<input type="range" step="1" min="0" max="0">
+		</div>
 		<div class="controls">
 			<div class="flex">
 				<div class="prev">
@@ -38,8 +37,10 @@
 		</div>
 	</section>
 
-	<audio id="audio" style="display: none;"></audio>
-
+	<section class="list">
+		<div class="container"></div>
+	</section>
+	
 	<script src="./assets/js/jquery.min.js"></script>
 	<script src="./assets/js/app.class.js"></script>
 	<script src="./assets/js/player.js"></script>
