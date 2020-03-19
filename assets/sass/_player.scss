@@ -1,0 +1,132 @@
+section.player{
+	display: block;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	height: 100px;
+	background-color: #2e2e2e;
+	box-shadow: 0 0 1px #7c7c7c;
+	transition:bottom .3s ease-in-out;
+
+	&.hidden{
+		bottom:-100px;
+		@media screen and (max-width: 555px){
+			bottom:-75px;
+		}
+	}
+
+	@media screen and (max-width: 555px){
+		height: 70px;
+	}
+
+	.image{
+		display: block;
+		width: 100px;
+		height: 100px;
+		float: left;
+
+		@media screen and (max-width: 555px){
+			width: 70px;
+			height: 70px;
+		}
+		img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.title, .artist{
+		display: inline-block;
+		width: calc(100vw - 305px);
+		white-space:nowrap;
+		overflow-x:hidden;
+		text-overflow:ellipsis;
+		margin-left:10px;
+		position: absolute;
+		color:#fff;
+		font-size: 20px;
+		line-height: 50px;
+		height: 50px;
+		@media screen and (max-width: 555px){
+			line-height: 35px;
+			height: 35px;
+			font-size: 16px;
+		}
+	}
+
+	.title{
+		top:0;
+		font-weight: bold;
+	}
+
+	.artist{
+		top:50px;
+		@media screen and (max-width: 555px){
+			top:35px;
+		}
+	}
+
+	.controls{
+		width: 200px;
+		display:inline-block;
+		float:right;
+		line-height: 100px;
+		text-align: center;
+		height: 100%;
+
+		@media screen and (max-width: 555px){
+			width: calc(200px / 3);
+		}
+
+		.flex{
+			display: flex;
+		}
+
+		.play-pause{
+			display: inline-block;
+			width:calc(200px / 3);
+			height: 100%;
+			font-size: 25px;
+			font-weight: bold;
+			cursor: pointer;
+
+			@media screen and (max-width: 555px){
+				line-height: 70px;
+			}
+
+			&:after{
+				display: inline-block;
+				content: '||';
+				color:#fff;
+			}
+
+			&.paused:after{
+				content: '▶' !important;
+				font-size: 30px;
+			}
+		}
+
+		
+
+		.prev, .next{
+			@media screen and (max-width: 555px){
+				display: none;
+			}
+			display: inline-block;
+			height: 100%;
+			color:#fff;
+			letter-spacing: -10px;
+			width:calc(200px / 3);
+			font-size: 20px;
+			text-align:center;
+			cursor: pointer;
+			img{
+				height: auto;
+				margin-top: 30px;
+				width: 50%;
+			}
+		}
+
+	}
+}
