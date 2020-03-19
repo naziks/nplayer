@@ -13,15 +13,7 @@
 	<nav>Nazarko's Music</nav>
 
 	<section class="list">
-		<div class="container">
-			<div class="item">
-				<div class="image">
-					<img src="http://placehold.it/250x250" alt="Image Cover">
-				</div>
-				<div class="title">Маленький Принц</div>
-				<div class="artist">ЛСП</div>
-			</div>
-		</div>
+		<div class="container"></div>
 	</section>
 	
 	<section class="player hidden">
