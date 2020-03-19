@@ -7,6 +7,7 @@
 	<title>nPlayer</title>
 	<link href="https://fonts.googleapis.com/css?family=Bellota|Source+Code+Pro&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./assets/css/main.min.css">
+	<meta name="mobile-web-app-capable" content="yes">
 </head>
 <body>
 
