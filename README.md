@@ -1,4 +1,4 @@
-# Nazarko's Player
+# nPlayer
 My own music player php/html/sass/js based
 
 ### Features  
